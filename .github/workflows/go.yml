@@ -23,23 +23,23 @@ jobs:
          CGO_ENABLED: 0
          GOOS: linux
          GOARCH: arm64         
-      run: go build -v -o v2ray-plugin_linux_arm64
+      run: go build -v -o v2ray-plugin_linux_arm64 && zstd -4 v2ray-plugin_linux_arm64
       
     - name: Build amd64
       env:
          CGO_ENABLED: 0
          GOOS: linux
          GOARCH: amd64
-      run: go build -v -o v2ray-plugin_linux_amd64
+      run: go build -v -o v2ray-plugin_linux_amd64 && zstd -4 v2ray-plugin_linux_amd64
       
     - name: Upload arm64
       uses: actions/upload-artifact@v2
       with:
           name: v2ray-plugin_linux_arm64
-          path: v2ray-plugin_linux_arm64
+          path: v2ray-plugin_linux_arm64.zst
           
     - name: Upload amd64
       uses: actions/upload-artifact@v2
       with:
           name: v2ray-plugin_linux_amd64
-          path: v2ray-plugin_linux_amd64
+          path: v2ray-plugin_linux_amd64.zst
